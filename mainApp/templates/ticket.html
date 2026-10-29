@@ -13,33 +13,74 @@
             DJANGO CINEMA
         </div>
     </header>
-    <main>
-        <div class="border border-dark border-4">
-            <div class="row justify-content-center align-items-center g-2">
-            <div class="col-12 display-5 bg-dark text-white text-center">DJANGO CINEMA TICKET</div>
+        <main>
+        <!-- Envolvemos el ticket en una fila centrada y limitamos su ancho máximo (ej. col-md-6) -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+                
+                <!-- Este es tu contenedor del ticket ahora centrado y acotado -->
+                <div class="border border-dark border-4 bg-white shadow-sm">
+                    <div class="row justify-content-center align-items-center g-0">
+                        <div class="col-12 display-6 bg-dark text-white text-center py-2">DJANGO CINEMA TICKET</div>
+                    </div>
+                    
+                    <!-- Envolvemos las secciones en una fila para que respeten la grilla de Bootstrap -->
+                  <div class="row p-4">
+    <div class="col-12 mb-3">
+        <!-- Creamos una fila interna para poner los textos a la izquierda y la imagen a la derecha -->
+        <div class="row align-items-center">
+            
+            <!-- Columna para los datos del ticket (ocupa 7 de 12 espacios) -->
+            <div class="col-7">
+                <h1 class="fs-4 fw-bold text-success mb-2">{{venta.funcion}}</h1>
+                <h3 class="fs-6 my-1"><b>Fecha:</b> {{venta.fecha}}</h3>
+                <h3 class="fs-6 my-1"><b>Hora:</b> {{venta.funcion.hora}}</h3>
+                <h3 class="fs-6 my-1"><b>Sala:</b> {{venta.funcion.sala}}</h3>
             </div>
-            <div class="col p-5">
-                <h1 class="fs-4">{{venta.funcion}}</h1>
-                <h3 class="fs-5">Fecha : {{venta.fecha}}</h3>
-                <h3 class="fs-5">Hora  : {{venta.hora}}</h3>
-                <h3 class="fs-5">Sala  : {{venta.sala}}</h3>
+            
+            <!-- Columna para la imagen de la película (ocupa 5 de 12 espacios) -->
+            <div class="col-5 text-end">
+                {% if venta.funcion.pelicula.imagen %}
+                <img src="{{ venta.funcion.pelicula.imagen.url }}" class="img-fluid rounded shadow-sm" style="max-height: 140px; object-fit: contain;">
+                {% endif %}
             </div>
-            <div class="col-md-5 cols-sm-12 p-5">
-                <h1 class="fs-4">{{venta.cliente}}</h1>
-                <h3 class="fs-5">Entradas : {{venta.entradas}}</h3>
-                <h3 class="fs-5">Total Descuento  : $ {{ venta.total_descuento}}</h3>
-                <h3 class="fs-5">Total Final : $ {{venta.total_final}}</h3>
-            </div>
-            <div class="col-2 cols-sm-12">
-                <img src="/media/qr/qr.png" class="img-fluid">
-            </div>
+            
         </div>
     </div>
-    <div class="alert alert-info mt-3 text-center" role="alert">
-        Debe presentar este ticket al ingreso
+    <hr>
+    <div class="col-12 mb-3">
+    <h1 class="fs-5">{{venta.cliente}}</h1>
+    <h3 class="fs-6"><b>Entradas:</b> {{venta.entradas}}</h3>
+    <h3 class="fs-6"><b>Total Descuento:</b> $ {{venta.total_descuento}}</h3>
+    
+    <!-- Cambiado a venta.funcion.precio o la propiedad equivalente de tu modelo -->
+    <h3 class="fs-6"><b>Total Final:</b> $ {{venta.funcion.precio}}</h3> 
     </div>
-    <a name="" id="" class="btn btn-primary" href="/" role="button">Volver</a>
+    <hr>
+    <!-- Centramos el código QR al final del ticket -->
+    <div class="col-12 text-center mt-2">
+        <img src="/media/qr/qr.png" class="img-fluid" style="max-width: 150px;">
+    </div>
+</div>
+                </div> <!-- /ticket -->
+
+            </div>
+        </div>
+
+        <!-- Botones y alertas fuera de la estructura del ticket -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="alert alert-info mt-3 text-center" role="alert">
+                    Debe presentar este ticket al ingreso
+                </div>
+                <div class="text-center">
+                    <a name="" id="" class="btn btn-primary w-100" href="/" role="button">Volver</a>
+                </div>
+            </div>
+        </div>
     </main>
+
+    
     <footer>
 
     </footer>
